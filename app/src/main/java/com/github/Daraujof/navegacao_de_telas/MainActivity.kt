@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.github.Daraujof.navegacao_de_telas.Screens.LoginScreen
 import com.github.Daraujof.navegacao_de_telas.Screens.MenuScreen
@@ -50,12 +51,18 @@ class MainActivity : ComponentActivity() {
                                 it.arguments?.getString("cliente")
                             )
                         }
-                        composable(route = "perfil/{nome}") {
+                        composable(
+                            route = "perfil/{nome}/{idade}",
+                            arguments = listOf(
+                                navArgument("nome") { type = NavType.StringType },
+                                navArgument("idade") { type = NavType.IntType }
+                            )
+                        ) {
                             val nome: String? = it.arguments?.getString("nome", "Usuário Genérico")
+                            val idade: Int? = it.arguments?.getInt("idade", 0)
                             PerfilScreen(
                                 modifier = Modifier.padding(innerPadding),
-                                navController,
-                                nome!!
+                                navController, nome!!, idade!!
                             )
                         }
                     }
