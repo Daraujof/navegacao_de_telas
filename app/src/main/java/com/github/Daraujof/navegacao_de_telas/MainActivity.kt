@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.navArgument
 import com.github.Daraujof.navegacao_de_telas.Screens.LoginScreen
 import com.github.Daraujof.navegacao_de_telas.Screens.MenuScreen
 import com.github.Daraujof.navegacao_de_telas.Screens.PedidosScreen
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Navegacao_de_telasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
                     val navController = rememberNavController()
 
                     NavHost(
@@ -36,12 +38,25 @@ class MainActivity : ComponentActivity() {
                         composable(route = "menu") {
                             MenuScreen(modifier = Modifier.padding(innerPadding), navController)
                         }
-                        composable(route = "pedidos") {
-                            PedidosScreen(modifier = Modifier.padding(innerPadding), navController)
+                        composable(
+                            route = "pedidos?cliente={cliente}",
+                            arguments = listOf(navArgument("cliente") {
+                                defaultValue = "Cliente Genérico"
+                            })
+                        ) {
+                            PedidosScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                it.arguments?.getString("cliente")
+                            )
                         }
                         composable(route = "perfil/{nome}") {
                             val nome: String? = it.arguments?.getString("nome", "Usuário Genérico")
-                            PerfilScreen(modifier = Modifier.padding(innerPadding), navController, nome!!)
+                            PerfilScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                nome!!
+                            )
                         }
                     }
                 }

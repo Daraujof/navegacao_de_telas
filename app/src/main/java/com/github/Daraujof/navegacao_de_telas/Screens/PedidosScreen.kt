@@ -17,8 +17,7 @@ import androidx.navigation.NavController
 import androidx.compose.ui.Alignment
 
 @Composable
-fun PedidosScreen(modifier: Modifier = Modifier, navController: NavController) {
-    Box(
+fun PedidosScreen(modifier: Modifier = Modifier, navController: NavController, cliente: String?) {    Box(
         modifier = modifier
             .fillMaxSize()
             .background(Color(0xFFFA9A9A9))
