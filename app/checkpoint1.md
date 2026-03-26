@@ -15,7 +15,7 @@ A baixo a explicação de cada evolução implementada
 
 ### Commit 1 — Parâmetro obrigatório na tela de Perfil
 
-A tela de Perfil abria sem nenhuma informação do usuário. A solução foi passar o nome pela rota de navegação.
+A tela de Perfil abria sem nenhuma informação do usuário.
 
 **`PerfilScreen.kt`** recebeu o parâmetro `nome: String` e passou a exibir `"PERFIL - Fulano de Tal"` no título.
 
@@ -33,8 +33,7 @@ navigate("perfil/Fulano de Tal")
 
 ### Commit 2 — Parâmetro opcional na tela de Pedidos
 
-Nem sempre o cliente é conhecido na hora de navegar, então esse parâmetro precisava ser opcional. A sintaxe da rota muda pra isso.
-
+Nem sempre o cliente é conhecido na hora de navegar, então esse parâmetro precisava ser opcional. 
 **`PedidosScreen.kt`** recebeu `cliente: String?` e o título virou `"PEDIDOS - $cliente"`.
 
 **`MainActivity.kt`** teve a rota definida como `"pedidos?cliente={cliente}"` (query string). Parâmetros opcionais exigem `navArgument` com `defaultValue` — aqui ficou `"Cliente Genérico"`.
@@ -57,7 +56,7 @@ A rota já estava pronta desde o commit anterior. Aqui só atualizei o botão da
 
 ### Commit 4 — Múltiplos parâmetros com tipos diferentes
 
-O Perfil evoluiu pra receber dois valores: `nome` (String) e `idade` (Int). O ponto novo aqui é declarar o tipo de cada parâmetro explicitamente, porque o Navigation Compose precisa saber como converter cada trecho da URL pro tipo certo.
+O Perfil evoluiu pra receber dois valores: `nome` (String) e `idade` (Int). O ponto novo aqui é declarar o tipo de cada parâmetro, porque o Navigation Compose precisa saber como converter cada trecho da URL pro tipo certo.
 
 **`PerfilScreen.kt`** recebeu `idade: Int` e o texto virou `"PERFIL - Fulano de Tal tem 27 anos"`.
 
